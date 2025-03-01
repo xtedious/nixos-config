@@ -6,18 +6,21 @@
     #Nixpkgs
     nixpkgs-stable.url = "nixpkgs/nixos-24.11";
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    # Formatter
+    alejandra.url = "github:kamadorueda/alejandra/3.1.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
     nixpkgs-stable,
+    alejandra,
     ...
   }: let
     system = "x86_64-linux";
     host = "xtedious";
     username = "xtedious";
-
     pkgs = import nixpkgs {
       inherit system;
       config = {
@@ -41,7 +44,10 @@
           inherit host;
           stable = stablePkgs;
         };
-       modules = [
+        modules = [
+          {
+            environment.systemPackages = [alejandra.defaultPackage.${system}];
+          }
           ./hosts/${host}/config.nix
         ];
       };

@@ -1,11 +1,18 @@
 # Main default config
-
 # NOTE!!! : Packages and Fonts are configured in packages-&-fonts.nix
-
-{ config, pkgs, host, username, options, lib, inputs, system, stable, ...}: let
-
+{
+  config,
+  pkgs,
+  host,
+  username,
+  options,
+  lib,
+  inputs,
+  system,
+  stable,
+  ...
+}: let
   inherit (import ./variables.nix) keyboardLayout;
-
 in {
   imports = [
     ./hardware.nix
@@ -22,12 +29,12 @@ in {
   # BOOT related stuff
   boot = {
     kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
-    #kernelPackages = pkgs.linuxPackages_latest; # Kernel 
+    #kernelPackages = pkgs.linuxPackages_latest; # Kernel
 
     kernelParams = [
       "systemd.mask=systemd-vconsole-setup.service"
       "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
-      "nowatchdog" 
+      "nowatchdog"
       "modprobe.blacklist=sp5100_tco" #watchdog for AMD
       "modprobe.blacklist=iTCO_wdt" #watchdog for Intel
     ];
@@ -36,9 +43,9 @@ in {
     #kernelModules = [ "v4l2loopback" ];
     #  extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
 
-    initrd = { 
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ ];
+    initrd = {
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod"];
+      kernelModules = [];
     };
 
     # Needed For Some Steam Games
@@ -46,7 +53,7 @@ in {
     #  "vm.max_map_count" = 2147483642;
     #};
 
-    ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub  
+    ## BOOT LOADERS: NOTE USE ONLY 1. either systemd or grub
     # Bootloader SystemD
     loader.systemd-boot.enable = true;
 
@@ -55,7 +62,7 @@ in {
       canTouchEfiVariables = true;
     };
 
-    loader.timeout = 5;    
+    loader.timeout = 5;
 
     # Bootloader GRUB
     #loader.grub = {
@@ -112,7 +119,7 @@ in {
   # networking
   networking.networkmanager.enable = true;
   networking.hostName = "${host}";
-  networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
+  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 
   # Set your time zone.
   # services.automatic-timezoned.enable = true; #based on IP location
@@ -135,14 +142,13 @@ in {
     LC_TIME = "en_US.UTF-8";
   };
 
-
   # Services to start
   services = {
     xserver = {
       enable = false;
       xkb = {
-	layout = "${keyboardLayout}";
-	variant = "";
+        layout = "${keyboardLayout}";
+        variant = "";
       };
     };
 
@@ -150,10 +156,10 @@ in {
       enable = true;
       vt = 3;
       settings = {
-	default_session = {
-	  user = username;
-	  command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
-	};
+        default_session = {
+          user = username;
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland"; # start Hyprland with a TUI login manager
+        };
       };
     };
 
@@ -204,7 +210,7 @@ in {
     printing = {
       enable = false;
       drivers = [
-	pkgs.hplipWithPlugin
+        pkgs.hplipWithPlugin
       ];
     };
 
@@ -222,14 +228,13 @@ in {
       dataDir = "/home/${username}";
       configDir = "/home/${username}/.config/syncthing";
     };
-
   };
 
   systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
+    path = [pkgs.flatpak];
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      '';
+    '';
   };
 
   # zram
@@ -262,10 +267,10 @@ in {
       enable = true;
       powerOnBoot = true;
       settings = {
-	General = {
-	  Enable = "Source,Sink,Media,Socket";
-	  Experimental = true;
-	};
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
       };
     };
   };
@@ -274,20 +279,20 @@ in {
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (
-	subject.isInGroup("users")
-	  && (
-	    action.id == "org.freedesktop.login1.reboot" ||
-	    action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
-	    action.id == "org.freedesktop.login1.power-off" ||
-	    action.id == "org.freedesktop.login1.power-off-multiple-sessions"
-	  )
-	)
-      {
-	return polkit.Result.YES;
-      }
-    })
+       polkit.addRule(function(action, subject) {
+         if (
+    subject.isInGroup("users")
+      && (
+        action.id == "org.freedesktop.login1.reboot" ||
+        action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+        action.id == "org.freedesktop.login1.power-off" ||
+        action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+      )
+    )
+         {
+    return polkit.Result.YES;
+         }
+       })
   '';
   security.pam.services.swaylock = {
     text = ''
@@ -300,11 +305,11 @@ in {
     settings = {
       auto-optimise-store = true;
       experimental-features = [
-	"nix-command"
-	"flakes"
+        "nix-command"
+        "flakes"
       ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
@@ -332,8 +337,8 @@ in {
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 4455 ];
-  networking.firewall.allowedUDPPorts = [ 4455 ];
+  networking.firewall.allowedTCPPorts = [4455];
+  networking.firewall.allowedUDPPorts = [4455];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

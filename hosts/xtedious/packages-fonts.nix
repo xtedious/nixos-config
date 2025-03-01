@@ -1,94 +1,97 @@
 # Packages and Fonts config including the "programs" options
-
-{ pkgs, inputs, stable, ...}: let
-
+{
+  pkgs,
+  inputs,
+  stable,
+  ...
+}: let
   python-packages = pkgs.python3.withPackages (
     ps:
-    with ps; [
-      requests
-      pyquery # needed for hyprland-dots Weather script
-    ]
+      with ps; [
+        requests
+        pyquery # needed for hyprland-dots Weather script
+      ]
   );
-
 in {
-
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = (with pkgs; [
-    # System Packages
-    baobab
-    btrfs-progs
-    clang
-    curl
-    cpufrequtils
-    duf
-    eza
-    ffmpeg   
-    glib #for gsettings to work
-    gsettings-qt
-    git
-    killall  
-    libappindicator
-    libnotify
-    # Default browser
-    stable.librewolf
-    ############################
-    openssl #required by Rainbow borders
-    pciutils
-    vim
-    wget
-    xdg-user-dirs
-    xdg-utils
+  environment.systemPackages =
+    (with pkgs; [
+      # System Packages
+      baobab
+      btrfs-progs
+      clang
+      curl
+      cpufrequtils
+      duf
+      eza
+      ffmpeg
+      glib #for gsettings to work
+      gsettings-qt
+      git
+      killall
+      libappindicator
+      libnotify
+      # Default browser
+      stable.librewolf
+      ############################
+      openssl #required by Rainbow borders
+      pciutils
+      vim
+      wget
+      xdg-user-dirs
+      xdg-utils
 
-    fastfetch
-    (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
-    #ranger
+      fastfetch
+      (mpv.override {scripts = [mpvScripts.mpris];}) # with tray
+      #ranger
 
-    # Hyprland Stuff
-    #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
-    ags_1 # desktop overview  
-    btop
-    brightnessctl # for brightness control
-    cava
-    cliphist
-    eog
-    gnome-system-monitor
-    grim
-    gtk-engine-murrine #for gtk themes
-    hypridle
-    imagemagick 
-    inxi
-    jq
-    kitty
-    libsForQt5.qtstyleplugin-kvantum #kvantum
-    networkmanagerapplet
-    nwg-look
-    nvtopPackages.full	 
-    pamixer
-    pavucontrol
-    playerctl
-    polkit_gnome
-    pyprland
-    libsForQt5.qt5ct
-    kdePackages.qt6ct
-    kdePackages.qtwayland
-    kdePackages.qtstyleplugin-kvantum #kvantum
-    rofi-wayland
-    slurp
-    swappy
-    swaynotificationcenter
-    swww
-    unzip
-    wallust
-    wl-clipboard
-    wlogout
-    xarchiver
-    yad
-    yt-dlp
+      # Hyprland Stuff
+      #(ags.overrideAttrs (oldAttrs: { inherit (oldAttrs) pname; version = "1.8.2"; }))
+      ags_1 # desktop overview
+      btop
+      brightnessctl # for brightness control
+      cava
+      cliphist
+      eog
+      gnome-system-monitor
+      grim
+      gtk-engine-murrine #for gtk themes
+      hypridle
+      imagemagick
+      inxi
+      jq
+      kitty
+      libsForQt5.qtstyleplugin-kvantum #kvantum
+      networkmanagerapplet
+      nwg-look
+      nvtopPackages.full
+      pamixer
+      pavucontrol
+      playerctl
+      polkit_gnome
+      pyprland
+      libsForQt5.qt5ct
+      kdePackages.qt6ct
+      kdePackages.qtwayland
+      kdePackages.qtstyleplugin-kvantum #kvantum
+      rofi-wayland
+      slurp
+      swappy
+      swaynotificationcenter
+      swww
+      unzip
+      wallust
+      wl-clipboard
+      wlogout
+      xarchiver
+      yad
+      yt-dlp
 
-    #waybar  # if wanted experimental next line
-    #(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
-  ]) ++ [
+      #waybar  # if wanted experimental next line
+      #(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
+    ])
+    ++ [
       python-packages
     ];
 
@@ -114,7 +117,6 @@ in {
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
       xwayland.enable = true;
     };
-
 
     waybar.enable = true;
     hyprlock.enable = true;
@@ -155,7 +157,6 @@ in {
       enable = true;
       enableSSHSupport = true;
     };
-
   };
 
   # Extra Portal Configuration
@@ -170,5 +171,4 @@ in {
       pkgs.xdg-desktop-portal
     ];
   };
-
 }

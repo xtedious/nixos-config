@@ -1,9 +1,9 @@
 # Users - NOTE: Packages defined on this will be on current user only
 {
-pkgs,
-username,
-stable,
-...
+  pkgs,
+  username,
+  stable,
+  ...
 }: let
   inherit (import ./variables.nix) gitUsername;
 in {
@@ -37,6 +37,7 @@ in {
         # Work Stuff
         libreoffice
         timer
+        pomodoro
         # Video Editing and Recording
         krita
         gimp
