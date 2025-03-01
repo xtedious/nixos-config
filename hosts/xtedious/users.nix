@@ -37,7 +37,6 @@ in {
         # Work Stuff
         libreoffice
         timer
-        pomodoro
         # Video Editing and Recording
         krita
         gimp
