@@ -20,6 +20,9 @@ alejandra . >/dev/null \
 # Update the flake lockfile
 sudo nix flake update
 
+# Showing your changes
+git diff -U0 '*.nix'
+
 echo "Rebuilding NixOS ..."
 
 # Rebuild script for my flake and outputting simple errors

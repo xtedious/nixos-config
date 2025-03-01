@@ -34,7 +34,6 @@ in {
       libnotify
       # Default browser
       stable.librewolf
-      ############################
       openssl #required by Rainbow borders
       pciutils
       vim
