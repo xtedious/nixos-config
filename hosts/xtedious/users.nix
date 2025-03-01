@@ -37,6 +37,7 @@ in {
         # Work Stuff
         libreoffice
         timer
+        pom
         # Video Editing and Recording
         krita
         gimp
