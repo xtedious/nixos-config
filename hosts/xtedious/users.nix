@@ -59,7 +59,7 @@ in {
         arduino-ide
         # 3D printing and modeling
         orca-slicer
-        freecad-wayland
+        freecad
       ];
     };
 
