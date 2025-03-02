@@ -57,6 +57,7 @@ in {
       grim
       gtk-engine-murrine #for gtk themes
       hypridle
+      hyprsunset # blue light filter
       imagemagick
       inxi
       jq
