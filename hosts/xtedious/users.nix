@@ -47,6 +47,7 @@ in {
         chatterino7
         # Dev stuff
         ollama
+        android-studio
         open-webui
         gnumake
         libgcc
@@ -60,6 +61,7 @@ in {
         # 3D printing and modeling
         orca-slicer
         freecad
+        blender
       ];
     };
 

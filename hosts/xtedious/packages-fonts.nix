@@ -21,6 +21,7 @@ in {
       baobab
       btrfs-progs
       clang
+      lldb # llvm dubugger
       curl
       cpufrequtils
       duf
