@@ -47,6 +47,7 @@ in {
         chatterino7
         # Dev stuff
         ollama
+        ikos # Static analyzer for C/C++
         android-studio
         open-webui
         gnumake
@@ -71,6 +72,8 @@ in {
   services.open-webui = {
     package = pkgs.open-webui;
     enable = true;
+    openFirewall = true;
+    port = 9090;
     environment = {
       ANONYMIZED_TELEMETRY = "False";
       DO_NOT_TRACK = "True";

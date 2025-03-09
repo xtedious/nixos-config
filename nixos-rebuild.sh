@@ -13,12 +13,13 @@ if git diff --quiet '*.nix'; then
 	popd
 	exit 0
 fi
+
+# Collect any nixos garbage left over from nix-shell
+nix-collect-garbage -d
+
 # Formating all nix files in this directory using alejandra
 alejandra . >/dev/null \
 	|| ( alejandra . ; echo "formatting failed" && exit 1)
-
-# Update the flake lockfile
-sudo nix flake update
 
 # Showing your changes
 git diff -U0 '*.nix'
