@@ -1,0 +1,12 @@
+# nixos logs
+*.log
+
+#patches
+./win_manager/dwm/patches/
+
+# dwm patch fail
+*.rej
+*.orig
+
+# Object Files
+*.o
