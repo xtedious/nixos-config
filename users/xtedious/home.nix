@@ -1,7 +1,12 @@
-{ config, pkgs, lib, unstable, ... }:
-
 {
-  
+  config,
+  pkgs,
+  lib,
+  unstable,
+  ...
+}: let
+  nixos-git-script = pkgs.writeShellScriptBin "nixos-git" (builtins.readFile ../../nixos-rebuild.sh);
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "xtedious";
@@ -26,15 +31,16 @@
   home.packages = with pkgs; [
     librewolf
     obs-studio
-    orca-slicer
+    unstable.orca-slicer
     discord
     mpv
     unstable.keepassxc
-    obsidian
+    unstable.obsidian
     anki
     ikos
     freecad
     unstable.arduino-ide
+    nixos-git-script
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of

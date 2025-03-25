@@ -13,9 +13,16 @@
       homeMode = "755";
       isNormalUser = true;
       description = "xtedious";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "scanner" "lp" "video" "input" "audio" ];
+      extraGroups = ["networkmanager" "wheel" "libvirtd" "scanner" "lp" "video" "input" "audio"];
     };
   };
+
+  # These are all the dynamic libraries
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # This will be moved to my neovim module
+    lua-language-server
+  ];
 
   environment.systemPackages = with pkgs; [
     # System Packages/includes basic dev tools
@@ -51,7 +58,7 @@
     ripgrep
     fd
     xclip
- ];
+  ];
 
   programs = {
     git.enable = true;
@@ -82,5 +89,5 @@
     noto-fonts
     noto-fonts-cjk-sans
     font-awesome
- ];
+  ];
 }

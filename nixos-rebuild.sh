@@ -5,7 +5,7 @@
 set -e
 
 # cd to your config
-pushd ~/nix/
+pushd ~/nixos-config/
 
 # Early return if no changes
 if git diff --quiet '*.nix'; then

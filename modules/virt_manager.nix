@@ -1,6 +1,9 @@
-{ config, pkgs, unstable, ...}:
-
 {
+  config,
+  pkgs,
+  unstable,
+  ...
+}: {
   # Install necessary packages
   environment.systemPackages = with pkgs; [
     virt-manager
@@ -19,7 +22,7 @@
       qemu = {
         swtpm.enable = true;
         ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        ovmf.packages = [pkgs.OVMFFull.fd];
       };
     };
     spiceUSBRedirection.enable = true;

@@ -53,18 +53,18 @@
           {
             environment.systemPackages = [alejandra.defaultPackage.${system}];
           }
-            ./default/config.nix
-            ./win_manager/dwm.nix
-            ./modules/virt_manager.nix
-            home-manager.nixosModules.home-manager 
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.xtedious = import ./users/xtedious/home.nix;
-              home-manager.extraSpecialArgs = {
-                unstable = unstablePkgs;
-              };
-            }
+          ./default/config.nix
+          ./win_manager/dwm.nix
+          ./modules/virt_manager.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.xtedious = import ./users/xtedious/home.nix;
+            home-manager.extraSpecialArgs = {
+              unstable = unstablePkgs;
+            };
+          }
         ];
       };
     };
