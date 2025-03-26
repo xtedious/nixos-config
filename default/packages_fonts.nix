@@ -58,6 +58,7 @@
     ripgrep
     fd
     xclip
+    libclang
   ];
 
   programs = {
