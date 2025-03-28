@@ -20,8 +20,6 @@
   # These are all the dynamic libraries
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    # This will be moved to my neovim module
-    lua-language-server
   ];
 
   environment.systemPackages = with pkgs; [
@@ -53,12 +51,9 @@
     # Notifications
     libnotify
     xdotool # keyboard input
-    # Current neovim
     unzip
-    ripgrep
-    fd
     xclip
-    libclang
+    ripgrep
   ];
 
   programs = {
