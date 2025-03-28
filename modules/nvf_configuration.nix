@@ -10,6 +10,10 @@
       style = "dark";
     };
 
+    filetree = {
+      neo-tree.enable = true;
+    };
+
     git.enable = true;
     statusline.lualine.enable = true;
     telescope.enable = true;
@@ -24,6 +28,12 @@
       python.enable = true;
       rust.enable = true;
     };
+
+    binds = {
+      whichKey.enable = true;
+      cheatsheet.enable = true;
+    };
+
     options = {
       shiftwidth = 4;
       tabstop = 4;
