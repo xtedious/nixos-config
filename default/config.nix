@@ -41,7 +41,12 @@
   };
 
   # Video drivers to be used
-  hardware.graphics.extraPackages = with pkgs; [intel-media-driver];
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+    ];
+  };
 
   # Network Stuff
   networking = {
@@ -196,11 +201,6 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-  };
-
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
   };
 
   console.keyMap = "us";

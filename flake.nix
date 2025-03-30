@@ -73,6 +73,7 @@
           ./default/config.nix
           ./win_manager/dwm.nix
           ./modules/virt_manager.nix
+          ./modules/pico-dev.nix
           nvf.nixosModules.default
           home-manager.nixosModules.home-manager
           {
@@ -81,17 +82,12 @@
               useUserPackages = true;
               users.xtedious = import ./users/xtedious/home.nix;
               extraSpecialArgs = {
-                unstable = unstablePkgs;
                 inherit inputs;
+                unstable = unstablePkgs;
               };
             };
           }
         ];
-      };
-    };
-    overlays.default = _final: prev: {
-      catppuccinWalls = prev.callPackage ./wallpapers.nix {
-        wallpapers = builtins.filter (wall: builtins.elem "catppuccin" wall.tags) (builtins.attrValues wallpkgs.wallpapers);
       };
     };
   };

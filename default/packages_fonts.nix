@@ -4,23 +4,28 @@
   inputs,
   unstable,
   ...
-}: {
+}: let
+  username = "xtedious";
+in {
+  pico-dev.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   users = {
     mutableUsers = true;
-    users.xtedious = {
+    users."${username}" = {
       homeMode = "755";
       isNormalUser = true;
-      description = "xtedious";
+      description = "${username}";
       extraGroups = ["networkmanager" "wheel" "libvirtd" "scanner" "lp" "video" "input" "audio"];
     };
+    defaultUserShell = pkgs.zsh;
   };
 
   # These are all the dynamic libraries
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-  ];
+  #programs.nix-ld.enable = true;
+  #  programs.nix-ld.libraries = with pkgs; [
+  #];
 
   environment.systemPackages = with pkgs; [
     # System Packages/includes basic dev tools
@@ -54,6 +59,13 @@
     unzip
     xclip
     ripgrep
+    # Desktop Environment
+    rofi
+    # Graphics
+    mesa
+    gpu-viewer
+    vulkan-tools
+    virtualglLib
   ];
 
   programs = {
@@ -72,11 +84,33 @@
       enable = true;
       enableSSHSupport = true;
     };
+
+    # zsh config
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      ohMyZsh = {
+        enable = true;
+        plugins = ["git"];
+        theme = "agnoster";
+      };
+
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
   };
 
   services = {
     # Music Daemon
     mpd.enable = true;
+
+    # Syncthing
+    syncthing = {
+      enable = true;
+      user = "${username}";
+      dataDir = "/home/${username}";
+      configDir = "/home/${username}/.config/syncthing";
+    };
   };
 
   # Fonts

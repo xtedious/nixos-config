@@ -43,13 +43,19 @@ in {
     discord
     librewolf
     obs-studio
+    qbittorrent
     unstable.obsidian
     anki
     unstable.libreoffice
+    krita
     # Security
     unstable.keepassxc
     # Screenshots utility
     ksnip
+    # Wine Stuff
+    wineWowPackages.stable
+    # Games
+    lutris
     # Custom made scripts
     nixos-git-script
   ];
