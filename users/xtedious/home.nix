@@ -48,6 +48,7 @@ in {
     anki
     unstable.libreoffice
     krita
+    blender
     # Security
     unstable.keepassxc
     # Screenshots utility

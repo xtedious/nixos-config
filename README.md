@@ -2,6 +2,7 @@
 
 ## To Do List (order from high priority to low priority)
 - properly organize dev environments into their own modules
+- set up hyprland
 - properly organize flake.nix 
 - add support for printers
 - add dotfiles
