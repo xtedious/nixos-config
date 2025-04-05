@@ -10,6 +10,13 @@
       style = "dark";
     };
 
+    ui.colorizer = {
+      enable = true;
+      setupOpts.filetypes = {
+        "*" = {};
+      };
+    };
+
     filetree = {
       neo-tree.enable = true;
     };
@@ -35,8 +42,8 @@
     };
 
     options = {
-      shiftwidth = 4;
-      tabstop = 4;
+      shiftwidth = 2;
+      tabstop = 2;
     };
 
     useSystemClipboard = true;

@@ -71,7 +71,7 @@
             ];
           }
           ./default/config.nix
-          ./win_manager/dwm.nix
+          ./win_manager/hyprland.nix
           ./modules/virt_manager.nix
           ./modules/pico-dev.nix
           nvf.nixosModules.default

@@ -42,7 +42,6 @@ in {
     wget
     git
     killall
-    feh # image viewer
     # Audio
     alsa-utils
     pavucontrol
@@ -55,12 +54,7 @@ in {
     unstable.dunst # Notification daemon
     # Notifications
     libnotify
-    xdotool # keyboard input
     unzip
-    xclip
-    ripgrep
-    # Desktop Environment
-    rofi
     # Graphics
     mesa
     gpu-viewer
@@ -103,6 +97,18 @@ in {
   services = {
     # Music Daemon
     mpd.enable = true;
+
+    # Display manager
+    greetd = {
+      enable = true;
+      vt = 3;
+      settings = {
+        default_session = {
+          user = "${username}";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time cmd Hyprland";
+        };
+      };
+    };
 
     # Syncthing
     syncthing = {

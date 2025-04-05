@@ -81,7 +81,6 @@
         variant = "";
       };
     };
-    # Add something minimal like greetd
 
     gvfs.enable = true;
     tumbler.enable = true;
